@@ -28,5 +28,4 @@ export class PostCreateComponent implements OnInit {
       return;
     }
   }
-
 }
