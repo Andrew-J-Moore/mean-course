@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 const postRoutes = require("./routes/posts");
+const userRoutes = require("./routes/users");
 
 const app = express();
 
-mongoose.connect("mongodb+srv://andrew:3KTjC5lZic8SoCaa@udemy-mean-njk9h.mongodb.net/udemy-mean?retryWrites=true&w=majority",
+mongoose.connect("mongodb+srv://andrew:3KTjC5lZic8SoCaa@udemy-mean-njk9h.mongodb.net/udemy-mean?w=majority",
 {useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => {
     console.log('Connected');
@@ -27,5 +28,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/posts",postRoutes);
+app.use("/api/user", userRoutes)
 
 module.exports = app;
