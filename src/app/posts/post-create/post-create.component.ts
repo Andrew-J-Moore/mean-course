@@ -73,7 +73,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       this.postsService.addPost(this.form.value.title, this.form.value.content, this.form.value.image);
       this.form.reset();
     } else {
-      this.postsService.updatePost(this.postId, this.form.value.title, this.form.value.content, this.form.value.image);
+      this.postsService.updatePost(this.postId, this.form.value.title, this.form.value.content, this.form.value.image, this.post.creator);
     }
   }
 
@@ -91,6 +91,8 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
+    if (this.authStatusSub) {
+      this.authStatusSub.unsubscribe();
+    }
   }
 }

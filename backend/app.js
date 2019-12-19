@@ -8,7 +8,7 @@ const userRoutes = require("./routes/users");
 
 const app = express();
 
-mongoose.connect("mongodb+srv://andrew:3KTjC5lZic8SoCaa@udemy-mean-njk9h.mongodb.net/udemy-mean?w=majority",
+mongoose.connect("mongodb+srv://andrew:" + process.env.MONGO_ATLAS_PASSWORD +"@udemy-mean-njk9h.mongodb.net/udemy-mean?w=majority",
 {useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => {
     console.log('Connected');
