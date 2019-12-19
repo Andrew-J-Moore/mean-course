@@ -28,6 +28,7 @@ export class PostListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   private authStatusSubscription: Subscription;
   userIsAuthenticated = false;
+  userId: string;
 
   constructor(
     public postsService: PostsService,
@@ -42,11 +43,15 @@ export class PostListComponent implements OnInit, OnDestroy {
         this.posts = postData.posts;
         this.totalPosts = postData.postCount;
         this.isLoading = false;
+        console.log(this.posts);
       });
+    this.userId = this.authService.getUserId();
+    console.log(this.userId);
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSubscription = this.authService.getAuthStatusListener().subscribe(
       isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
+        this.userId = this.authService.getUserId();
       }
     );
   }
@@ -63,6 +68,8 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.postsService.deletePost(postId).subscribe(() => {
       this.postsService.getPosts(this.postsPerPage, this.currentPage);
+    }, () => {
+      this.isLoading = false;
     });
   }
 

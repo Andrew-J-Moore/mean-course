@@ -21,7 +21,8 @@ router.post("/signup", (req, res, next) => {
     }).catch(err => {
       console.log(err);
       res.status(500).json({
-        error: err
+        error: err,
+        message: "This email is already in use"
       });
     });
   });
@@ -42,7 +43,7 @@ router.post("/login", (req, res, next) => {
   .then(result => {
     if(!result) {
       return res.status(401).json({
-        message: "Auth Failed"
+        message: "Incorrect Email/Password"
       });
     }
     const token = jwt.sign(
@@ -53,7 +54,8 @@ router.post("/login", (req, res, next) => {
     res.status(200).json({
       message: "Authentication Successful",
       token: token,
-      expiresIn: 3600
+      expiresIn: 3600,
+      userId: fetchedUser._id
     })
   })
   .catch(err => {
