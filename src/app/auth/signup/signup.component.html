@@ -11,7 +11,7 @@
       <input matInput type="password" name="password" ngModel #passwordInput="ngModel" required>
       <mat-error *ngIf="passwordInput.invalid">Please enter your password.</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="accent" type="submit">Sign Up</button>
+    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Sign Up</button>
   </form>
-  <small>Already have an account? <a routerLink="/login">Login</a></small>
+  <small *ngIf="!isLoading">Already have an account? <a routerLink="/login">Login</a></small>
 </mat-card>
